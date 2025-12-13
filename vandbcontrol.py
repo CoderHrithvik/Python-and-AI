@@ -1,20 +1,26 @@
 import cv2
 import numpy as np
 import mediapipe as mp
+from ctypes import cast, POINTER
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 from comtypes import CLSCTX_ALL
 from math import hypot
 import screen_brightness_control as sbc
 
+# Initialize MediaPipe Hands
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(min_detection_confidence=0.7, min_tracking_confidence=0.7)
 mp_draw = mp.solutions.drawing_utils
 
-# Initialize Pycaw for volume control
+from ctypes import cast, POINTER
+from comtypes import CLSCTX_ALL
+from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
+
 try:
     devices = AudioUtilities.GetSpeakers()
     interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
-    volume = interface.QueryInterface(IAudioEndpointVolume)
+    volume = cast(interface, POINTER(IAudioEndpointVolume))
+
     vol_range = volume.GetVolumeRange()
     min_vol = vol_range[0]
     max_vol = vol_range[1]
