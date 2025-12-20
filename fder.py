@@ -1,8 +1,4 @@
-# Real-Time Face Detection + Emotion Recognition
-# Requirements:
-# - pip install opencv-python
-# - Option A (easiest): pip install fer  (uses a pretrained emotion model)
-#   If FER isn't available, the script will still run face detection and show "Unknown" emotion.
+
 
 import cv2
 import numpy as np
