@@ -350,8 +350,21 @@ def short_pass(player_rect):
 
 def handle_collisions():
     global ball_vel, last_touch
-    if ball.top <= 0 or ball.bottom >= HEIGHT:
-        ball_vel.y *= -1
+
+    # --- Ceiling and floor bounce (anti-stuck version) ---
+    if ball.top <= 0:
+        ball.top = 0
+        if abs(ball_vel.y) < 2:
+            ball_vel.y = 3
+        else:
+            ball_vel.y *= -1
+
+    if ball.bottom >= HEIGHT:
+        ball.bottom = HEIGHT
+        if abs(ball_vel.y) < 2:
+            ball_vel.y = -3
+        else:
+            ball_vel.y *= -1
 
     # All outfield players
     for tag, p in (("p1", player1), ("p1", player3), ("p2", player2), ("p2", player4)):
@@ -369,7 +382,6 @@ def handle_collisions():
         if g.colliderect(ball):
             ball_vel.x *= -1.1
             ball_vel.y *= 1.05
-
 
 def tackle(attacker, defender_tag):
     global ball_vel, last_touch, game_state, pending_penalty_for
