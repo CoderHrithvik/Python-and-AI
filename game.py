@@ -168,3 +168,8 @@ def game_loop(death_count):
 
 # Run
     game_loop(death_count)
+    
+if __name__ == "__main__":
+    game = Game()
+    game.run()
+    pygame.quit()
