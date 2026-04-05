@@ -1,4 +1,4 @@
-from randomizer import BadmintonSystem
+from KBCrandomizer import BadmintonSystem
 
 system = BadmintonSystem()
 
