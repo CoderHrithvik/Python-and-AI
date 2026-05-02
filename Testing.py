@@ -1,22 +1,11 @@
-print("Is this is correct string?")
+import numpy as np
 
-print("Hrithvik" +  " vankadaru")
+samples = np.frombuffer(audio_data, dtype=np.int16)
 
-print(f"mani" * 5)
+num_samples = len(samples)
 
-print(("heethu" + "is \n") * 10 + "cool guy")
+sample_rate = 16000
 
-print ( (10 + 4) - 10-4)
+duration = num_samples / sample_rate
 
-number = 5
-squared = number ** 2
-print (squared)
-
-number = 7
-cubed = pow(number, 3)
-print(cubed)
-
-print(24 % 7)  
-print("10  billion is a long number.")
-print(1000000000)
-
+print(f"Duration: {duration:.2f} seconds")
