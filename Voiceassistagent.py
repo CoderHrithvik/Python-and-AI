@@ -19,7 +19,7 @@ def get_audio():
             return command.lower()
         except sr.UnknownValueError:
             print("Sorry, I did not understand that.")
-    return ""
+        return ""
 
 def respond_to_command(command):
     if "hello" in command:
