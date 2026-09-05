@@ -7,11 +7,21 @@ from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 import screen_brightness_control as sbc
 
 # ------------------ Setup Volume Control (PyCaw) ------------------
+from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
+from ctypes import cast, POINTER
+from comtypes import CLSCTX_ALL
+
 devices = AudioUtilities.GetSpeakers()
-interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
+interface = devices.Activate(
+    IAudioEndpointVolume._iid_,
+    CLSCTX_ALL,
+    None
+)
+
 volume = cast(interface, POINTER(IAudioEndpointVolume))
-vol_range = volume.GetVolumeRange()  # (min, max, step)
-min_vol, max_vol = vol_range[0], vol_range[1]
+
+# Get volume range
+min_vol, max_vol, _ = volume.GetVolumeRange()
 
 # ------------------ Setup Mediapipe ------------------
 mp_hands = mp.solutions.hands
